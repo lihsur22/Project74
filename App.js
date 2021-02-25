@@ -12,9 +12,20 @@ export default function App() {
 }
 
 const tabNavigator = createBottomTabNavigator({
-  A : {screen : WriteScreen},
-  B : {screen : ReadScreen}
-})
+  Write : {screen : WriteScreen},
+  Read : {screen : ReadScreen}
+},
+  {defaultNavigationOptions : ({navigation}) => ({tabBarIcon : () => {
+    const routeName = navigation.state.routeName
+    if(routeName==="Write")
+    {
+      return(<Image source={require("./assets/write.png")} style={{width:40, height:40}}/>)
+    } else if (routeName === "Read")
+    {
+      return(<Image source={require("./assets/read.png")} style={{width:40, height:40}}/>)
+    }
+  }})}
+)
 
 const AppContainer = createAppContainer(tabNavigator);
 
