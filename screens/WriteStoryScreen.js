@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, KeyboardAvoidingView, ToastAndroid } from 'react-native';
 import { Header } from 'react-native-elements';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import db from '../config';
-import firebase from 'firebase';
 
 export default class WriteScreen extends React.Component{
 	constructor(){
@@ -24,6 +23,10 @@ export default class WriteScreen extends React.Component{
 		});
 
 		alert('Story Submitted');
+		/*ToastAndroid.show("Story Submittet", ToastAndroid.SHORT);
+			As seen before, toast doesn't work on my phone.
+			Kindly uncomment to test if it works.
+		*/
 
 		this.setState({
 			bookAuthor : '',
@@ -34,24 +37,27 @@ export default class WriteScreen extends React.Component{
 
 	render(){
 		return(
-			<View>
-				<SafeAreaProvider>
-					<Header
-            backgroundColor={'#ffadec'}
-            centerComponent={{
-              text: 'Story Hub',
-          	  style: { color: 'fff', fontSize: 20, fontWeight:'bold' },
-          }}/>
-					<View style={styles.container}>
-						<TextInput style={styles.titleBox} placeholder='Enter Title' multiline={true} value={this.state.bookTitle} onChangeText={(text)=>{this.setState({bookTitle : text})}}/>
-						<TextInput style={styles.titleBox} placeholder='Enter Author' multiline={true} value={this.state.bookAuthor} onChangeText={(text)=>{this.setState({bookAuthor : text})}}/>
-						<TextInput style={styles.storyBox} placeholder='Write the Story' multiline={true} value={this.state.story} onChangeText={(text)=>{this.setState({story : text})}}/>
-						<TouchableOpacity style={styles.submitButton} onPress={()=>{this.submitStory()}}>
-							<Text style={styles.text}>Submit</Text>
-						</TouchableOpacity>
-					</View>
-				</SafeAreaProvider>
-			</View>
+			<KeyboardAvoidingView style={styles.container} behavior='padding' enabled>
+				<View>
+					<SafeAreaProvider>
+						<Header
+							backgroundColor={'#ffadec'}
+							centerComponent={{
+								text: 'Story Hub',
+								style: { color: 'fff', fontSize: 20, fontWeight:'bold' },
+							}}
+						/>
+						<View style={styles.container}>
+							<TextInput style={styles.titleBox} placeholder='Enter Title' multiline={true} value={this.state.bookTitle} onChangeText={(text)=>{this.setState({bookTitle : text})}}/>
+							<TextInput style={styles.titleBox} placeholder='Enter Author' multiline={true} value={this.state.bookAuthor} onChangeText={(text)=>{this.setState({bookAuthor : text})}}/>
+							<TextInput style={styles.storyBox} placeholder='Write the Story' multiline={true} value={this.state.story} onChangeText={(text)=>{this.setState({story : text})}}/>
+							<TouchableOpacity style={styles.submitButton} onPress={()=>{this.submitStory()}}>
+								<Text style={styles.text}>Submit</Text>
+							</TouchableOpacity>
+						</View>
+					</SafeAreaProvider>
+				</View>
+			</KeyboardAvoidingView>
 		)
 	}
 }
