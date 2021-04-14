@@ -18,6 +18,7 @@ export default class WriteScreen extends React.Component{
 		console.log(title + ', ' + author + ', ' + story);*/
 		db.collection("books").add({
 			'author' : this.state.bookAuthor,
+			'authorCheck' : this.state.bookAuthor.toUpperCase(),
 			'title' : this.state.bookTitle,
 			'story' : this.state.story
 		});
