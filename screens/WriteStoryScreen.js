@@ -20,6 +20,7 @@ export default class WriteScreen extends React.Component{
 			'author' : this.state.bookAuthor,
 			'authorCheck' : this.state.bookAuthor.toUpperCase(),
 			'title' : this.state.bookTitle,
+			'titleCheck' : this.state.bookTitle.toUpperCase(),
 			'story' : this.state.story
 		});
 
